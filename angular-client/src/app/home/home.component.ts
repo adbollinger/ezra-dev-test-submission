@@ -27,8 +27,16 @@ export class HomeComponent {
   }
 
   deleteMember(id) {
-    // TODO
-    throw 'Implement me'
+    // (DONE) TODO
+    this.memberService.DeleteMember(id)
+    .pipe(take(1))
+    .subscribe(
+      (result) => {
+        // The alternative would be getting the index of the deleted member, then splicing them from the array
+        // Considering the relatively small size of members in this case, I decided to go with the api call
+        this.getMembers();
+      }
+    )
   }
 
   editMember(id) {

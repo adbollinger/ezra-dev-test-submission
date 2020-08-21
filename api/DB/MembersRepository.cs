@@ -34,7 +34,7 @@ namespace EzraTest.DB
         /// <inheritdoc />
         public Member GetMember(Guid id)
         {
-            return ExecuteQuery($"SELECT * FROM MEMBERS WHERE Id = '{id}'", (reader) =>
+            return ExecuteQuery($"SELECT * FROM MEMBERS WHERE Id = '{id.ToString("N")}'", (reader) =>
             {
                 return new Member
                 {
@@ -49,21 +49,21 @@ namespace EzraTest.DB
         public int AddMember(Member member)
         {
             // (DONE) TODO
-            return this.ExecuteNonQuery($"INSERT INTO MEMBERS (ID, NAME, EMAIL) VALUES ('{member.Id}', '{member.Name}', '{member.Email}')");
+            return this.ExecuteNonQuery($"INSERT INTO MEMBERS (ID, NAME, EMAIL) VALUES ('{member.Id.ToString("N")}', '{member.Name}', '{member.Email}')");
         }
 
         /// <inheritdoc />
         public int UpdateMember(Member member)
         {
             // (DONE) TODO
-            return this.ExecuteNonQuery($"UPDATE MEMBERS SET NAME = '{member.Name}', EMAIL = '{member.Email}' WHERE ID = '{member.Id}'");
+            return this.ExecuteNonQuery($"UPDATE MEMBERS SET NAME = '{member.Name}', EMAIL = '{member.Email}' WHERE ID = '{member.Id.ToString("N")}'");
         }
 
         /// <inheritdoc />
         public int DeleteMember(Guid id)
         {
             // (DONE) TODO
-            return this.ExecuteNonQuery($"DELETE FROM MEMBERS HERE ID = '{id}'");
+            return this.ExecuteNonQuery($"DELETE FROM MEMBERS WHERE ID = '{id.ToString("N")}'");
         }
 
         private IEnumerable<T> ExecuteQuery<T>(string commandText, Func<SqliteDataReader, T> func)

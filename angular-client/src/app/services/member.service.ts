@@ -25,7 +25,7 @@ export class MemberService {
   }
 
   DeleteMember(id): Observable<any> {
-    return this.http.delete<Member[]>(`${this.basePath}/delete`);
+    return this.http.delete<Member[]>(`${this.basePath}/delete/${id}`);
   }
 
 }

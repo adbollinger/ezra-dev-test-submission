@@ -46,24 +46,24 @@ namespace EzraTest.DB
         }
 
         /// <inheritdoc />
-        public void AddMember(Member member)
+        public int AddMember(Member member)
         {
             // TODO
-            throw new NotImplementedException();
+            return this.ExecuteNonQuery($"INSERT INTO MEMBERS (ID, NAME, EMAIL) VALUES ('{member.Id}', '{member.Name}', '{member.Email}')");
         }
 
         /// <inheritdoc />
-        public void UpdateMember(Guid id, Member member)
+        public int UpdateMember(Guid id, Member member)
         {
             // TODO
-            throw new NotImplementedException();
+            return this.ExecuteNonQuery($"UPDATE MEMBERS SET NAME = '{member.Name}', EMAIL = '{member.Email}' WHERE ID = '{member.Id}'");
         }
 
         /// <inheritdoc />
-        public void DeleteMember(Guid id)
+        public int DeleteMember(Guid id)
         {
             // TODO
-            throw new NotImplementedException();
+            return this.ExecuteNonQuery($"DELETE FROM MEMBERS HERE ID = '{id}'");
         }
 
         private IEnumerable<T> ExecuteQuery<T>(string commandText, Func<SqliteDataReader, T> func)

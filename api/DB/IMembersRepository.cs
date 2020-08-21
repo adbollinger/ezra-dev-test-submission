@@ -24,19 +24,22 @@ namespace EzraTest.DB
         /// Adds the member to the database.
         /// </summary>
         /// <param name="member">The member to add.</param>
-        void AddMember(Member member);
+        /// <returns>Number of rows affected.</returns>
+        int AddMember(Member member);
 
         /// <summary>
         /// Updates the member with <paramref name="id"/> to the values in <paramref name="member"/>.
         /// </summary>
         /// <param name="id">The id of the member to update.</param>
         /// <param name="member">The new member data.</param>
-        void UpdateMember(Guid id, Member member);
+        /// <returns>Number of rows affected.</returns>
+        int UpdateMember(Guid id, Member member);
 
         /// <summary>
         /// Removes the member from the database with <paramref name="id"/>.
         /// </summary>
         /// <param name="id">The id of the member.</param>
-        void DeleteMember(Guid id);
+        /// <returns>Number of rows affected.</returns>
+        int DeleteMember(Guid id);
     }
 }

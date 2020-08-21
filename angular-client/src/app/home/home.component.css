@@ -17,3 +17,27 @@
   display: flex;
   flex-direction: row;
 }
+
+.added {
+  color: #8cc63f;
+}
+
+.table td, .table th {
+  border: none;
+}
+
+.table .btn-delete {
+  border-color: red;
+}
+
+.table .btn-delete:hover {
+  background-color: red;
+}
+
+.table .btn-edit {
+  border-color: rgb(37, 24, 207);
+}
+
+.table .btn-edit:hover {
+  background-color: rgb(24, 119, 207);
+}

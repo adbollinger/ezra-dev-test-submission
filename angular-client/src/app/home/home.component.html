@@ -2,7 +2,7 @@
 
 <p *ngIf="!members"><em>Loading...</em></p>
 
-<table class="table table-striped" *ngIf="members">
+<table class="table table-striped table-bordered table-hover" *ngIf="members">
   <thead>
     <tr>
       <th>ID</th>
@@ -12,15 +12,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let member of members">
+    <tr *ngFor="let member of members" [class.added]="routeId.trim() == member.id.trim()">
       <td>{{ member.id }}</td>
       <td>{{ member.name }}</td>
       <td>{{ member.email }}</td>
       <td class="btn-group">
-        <button class="img-btn btn-link" (click)="deleteMember(member.id)">
+        <button class="img-btn btn-link btn-delete" (click)="deleteMember(member.id)">
           <img src="../../assets/delete.svg" width='12px' height='12px' />
         </button>
-        <button class="img-btn btn-link" (click)="openEditModal(member)">
+        <button class="img-btn btn-link btn-edit" (click)="openEditModal(member)">
           <img src="../../assets/edit.svg" width='12px' height='12px' />
         </button>
       </td>

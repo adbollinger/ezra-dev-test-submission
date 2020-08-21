@@ -29,6 +29,7 @@ import * as bootstrap from "bootstrap";
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'add-member', component: AddMemberComponent },
+      { path: 'add-member:id', component: AddMemberComponent },
     ])
   ],
   providers: [],

@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { AddMemberRequest } from '../classes/member';
 import { MemberService } from '../services/member.service';
 import { take } from 'rxjs/operators'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-member',
@@ -11,7 +12,8 @@ export class AddMemberComponent {
   member: AddMemberRequest;
   valid: boolean = false;
 
-  constructor(private memberService: MemberService) { 
+  constructor(private memberService: MemberService,
+    private router: Router) { 
     this.member = this.getEmptyMember();
   }
 
@@ -21,12 +23,12 @@ export class AddMemberComponent {
   }
   
   addMember() {
-    // TODO
+    // (DONE) TODO
     this.memberService.AddMember(this.member)
     .pipe(take(1))
     .subscribe(
       (result) => {
-        // TODO - add redirect
+        this.router.navigate(['/'], { queryParams: {id: result.id}});
       }
     );
   }

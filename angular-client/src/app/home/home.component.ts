@@ -1,20 +1,23 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { Member, AddMemberRequest } from '../classes/member'
 import { MemberService } from '../services/member.service'
 import { take } from 'rxjs/operators'
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public members: Member[];
   public idForEdit: string;
   public memberForEdit: AddMemberRequest;
   public valid: boolean = false;
+  public routeId: string = '';
 
-  constructor(private memberService: MemberService) {
+  constructor(private memberService: MemberService,
+    private route: ActivatedRoute) {
     this.getMembers();
     this.memberForEdit = {
       Name: '',
@@ -22,28 +25,34 @@ export class HomeComponent {
     };
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      this.routeId = String(params.id);
+    });
+  }
+
   getMembers() {
     this.memberService.GetMembers()
-    .pipe(take(1))
-    .subscribe(
-      (result) => {
-        this.members = result
-      },
-      (error) => console.error(error),
-    )
+      .pipe(take(1))
+      .subscribe(
+        (result) => {
+          this.members = result
+        },
+        (error) => console.error(error),
+      )
   }
 
   deleteMember(id) {
     // (DONE) TODO
     this.memberService.DeleteMember(id)
-    .pipe(take(1))
-    .subscribe(
-      (result) => {
-        // The alternative would be getting the index of the deleted member, then splicing them from the array
-        // Considering the relatively small size of members in this case, I decided to go with the api call
-        this.getMembers();
-      }
-    )
+      .pipe(take(1))
+      .subscribe(
+        (result) => {
+          // The alternative would be getting the index of the deleted member, then splicing them from the array
+          // Considering the relatively small size of members in this case, I decided to go with the api call
+          this.getMembers();
+        }
+      )
   }
 
   openEditModal(member) {
@@ -61,7 +70,7 @@ export class HomeComponent {
   }
 
   editMember() {
-    // TODO
+    // (DONE) TODO
     const member: Member = {
       Id: this.idForEdit,
       Name: this.memberForEdit.Name,

@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
 
   deleteMember(id) {
     // (DONE) TODO
+    $('#loading_overlay').removeClass('d-none');
     this.memberService.DeleteMember(id)
       .pipe(take(1))
       .subscribe(
@@ -51,7 +52,9 @@ export class HomeComponent implements OnInit {
           // The alternative would be getting the index of the deleted member, then splicing them from the array
           // Considering the relatively small size of members in this case, I decided to go with the api call
           this.getMembers();
-        }
+          $('#loading_overlay').addClass('d-none');
+        },
+        (error) => console.error(error),
       )
   }
 
@@ -77,6 +80,7 @@ export class HomeComponent implements OnInit {
       Email: this.memberForEdit.Email
     };
 
+    $('#loading_overlay').removeClass('d-none');
     this.memberService.EditMember(member)
       .pipe(take(1))
       .subscribe(
@@ -85,6 +89,7 @@ export class HomeComponent implements OnInit {
           // Considering the relatively small size of members in this case, I decided to go with the api call
           this.getMembers();
           $('#edit_member').modal('hide');
+          $('#loading_overlay').addClass('d-none');
         },
         (error) => console.error(error),
       );

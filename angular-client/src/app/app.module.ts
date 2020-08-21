@@ -13,14 +13,16 @@ import { MemberFormComponent } from './member-form/member-form.component';
 // To remove the errors complaining that $ and .modal are undefined
 ///import * as $ from "jquery";
 import * as bootstrap from "bootstrap";
+import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     AddMemberComponent,
-      MemberFormComponent
+      MemberFormComponent,
+      LoadingOverlayComponent
    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

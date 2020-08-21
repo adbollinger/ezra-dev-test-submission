@@ -13,7 +13,7 @@ export class AddMemberComponent {
   valid: boolean = false;
 
   constructor(private memberService: MemberService,
-    private router: Router) { 
+    private router: Router) {
     this.member = this.getEmptyMember();
   }
 
@@ -21,16 +21,19 @@ export class AddMemberComponent {
     this.valid = value.valid;
     this.member = value.member;
   }
-  
+
   addMember() {
     // (DONE) TODO
+    $('#loading_overlay').removeClass('d-none');
     this.memberService.AddMember(this.member)
-    .pipe(take(1))
-    .subscribe(
-      (result) => {
-        this.router.navigate(['/'], { queryParams: {id: result.id}});
-      }
-    );
+      .pipe(take(1))
+      .subscribe(
+        (result) => {
+          this.router.navigate(['/'], { queryParams: { id: result.id } });
+          $('#loading_overlay').addClass('d-none');
+        },
+        (error) => console.error(error),
+      );
   }
 
   getEmptyMember(): AddMemberRequest {

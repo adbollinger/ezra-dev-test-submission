@@ -20,6 +20,11 @@
 
 .added {
   color: #8cc63f;
+  font-weight: bold;
+}
+
+.added:hover {
+  color: #8cc63f;
 }
 
 .table td, .table th {

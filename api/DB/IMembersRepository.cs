@@ -30,10 +30,9 @@ namespace EzraTest.DB
         /// <summary>
         /// Updates the member with <paramref name="id"/> to the values in <paramref name="member"/>.
         /// </summary>
-        /// <param name="id">The id of the member to update.</param>
         /// <param name="member">The new member data.</param>
         /// <returns>Number of rows affected.</returns>
-        int UpdateMember(Guid id, Member member);
+        int UpdateMember(Member member);
 
         /// <summary>
         /// Removes the member from the database with <paramref name="id"/>.

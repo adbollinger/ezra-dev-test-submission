@@ -48,21 +48,21 @@ namespace EzraTest.DB
         /// <inheritdoc />
         public int AddMember(Member member)
         {
-            // TODO
+            // (DONE) TODO
             return this.ExecuteNonQuery($"INSERT INTO MEMBERS (ID, NAME, EMAIL) VALUES ('{member.Id}', '{member.Name}', '{member.Email}')");
         }
 
         /// <inheritdoc />
-        public int UpdateMember(Guid id, Member member)
+        public int UpdateMember(Member member)
         {
-            // TODO
+            // (DONE) TODO
             return this.ExecuteNonQuery($"UPDATE MEMBERS SET NAME = '{member.Name}', EMAIL = '{member.Email}' WHERE ID = '{member.Id}'");
         }
 
         /// <inheritdoc />
         public int DeleteMember(Guid id)
         {
-            // TODO
+            // (DONE) TODO
             return this.ExecuteNonQuery($"DELETE FROM MEMBERS HERE ID = '{id}'");
         }
 

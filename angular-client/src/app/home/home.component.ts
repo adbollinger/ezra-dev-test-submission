@@ -11,10 +11,12 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   public members: Member[];
-  public idForEdit: string;
   public memberForEdit: AddMemberRequest;
   public valid: boolean = false;
   public routeId: string = '';
+
+  private idForEdit: string;
+  private idForDelete: string;
 
   constructor(private memberService: MemberService,
     private route: ActivatedRoute) {
@@ -42,10 +44,16 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  deleteMember(id) {
+  openDeleteModal(id) {
+    this.idForDelete = id;
+
+    $('#confirm_modal').modal('show');
+  }
+
+  deleteMember() {
     // (DONE) TODO
     $('#loading_overlay').removeClass('d-none');
-    this.memberService.DeleteMember(id)
+    this.memberService.DeleteMember(this.idForDelete)
       .pipe(take(1))
       .subscribe(
         (result) => {
@@ -53,6 +61,7 @@ export class HomeComponent implements OnInit {
           // Considering the relatively small size of members in this case, I decided to go with the api call
           this.getMembers();
           $('#loading_overlay').addClass('d-none');
+          $('#confirm_modal').modal('hide');
         },
         (error) => console.error(error),
       )

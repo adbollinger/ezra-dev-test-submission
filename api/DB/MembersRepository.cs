@@ -85,7 +85,7 @@ namespace EzraTest.DB
             }
         }
 
-        private IEnumerable<T> ExecuteNonQuery<T>(string commandText)
+        private int ExecuteNonQuery(string commandText)
         {
             using (var connection = new SqliteConnection(_connectionString))
             {
@@ -93,7 +93,7 @@ namespace EzraTest.DB
 
                 var command = connection.CreateCommand();
                 command.CommandText = commandText;
-                command.ExecuteNonQuery();
+                return command.ExecuteNonQuery();
             }
         }
     }

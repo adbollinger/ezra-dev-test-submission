@@ -20,10 +20,27 @@
         <button class="img-btn btn-link" (click)="deleteMember(member.id)">
           <img src="../../assets/delete.svg" width='12px' height='12px' />
         </button>
-        <button class="img-btn btn-link" (click)="editMember(member.id)">
+        <button class="img-btn btn-link" (click)="openEditModal(member)">
           <img src="../../assets/edit.svg" width='12px' height='12px' />
         </button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<div class="modal fade" id="edit_member" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit member</h5>
+      </div>
+      <div class="modal-body">
+        <app-member-form [member]="memberForEdit" (formOutput)="setMember($event)"></app-member-form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!valid" (click)="editMember()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

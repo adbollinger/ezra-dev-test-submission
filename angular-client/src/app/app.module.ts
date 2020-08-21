@@ -10,6 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { MemberFormComponent } from './member-form/member-form.component';
 
+// To remove the errors complaining that $ and .modal are undefined
+///import * as $ from "jquery";
+import * as bootstrap from "bootstrap";
+
 @NgModule({
   declarations: [	
     AppComponent,

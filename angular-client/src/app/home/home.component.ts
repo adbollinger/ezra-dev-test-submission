@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core'
-import { Member } from '../classes/member'
+import { Member, AddMemberRequest } from '../classes/member'
 import { MemberService } from '../services/member.service'
 import { take } from 'rxjs/operators'
 
@@ -9,10 +9,17 @@ import { take } from 'rxjs/operators'
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  public members: Member[]
+  public members: Member[];
+  public idForEdit: string;
+  public memberForEdit: AddMemberRequest;
+  public valid: boolean = false;
 
   constructor(private memberService: MemberService) {
     this.getMembers();
+    this.memberForEdit = {
+      Name: '',
+      Email: ''
+    };
   }
 
   getMembers() {
@@ -39,8 +46,38 @@ export class HomeComponent {
     )
   }
 
-  editMember(id) {
+  openEditModal(member) {
+    this.idForEdit = member.id;
+    this.memberForEdit = {
+      Name: member.name,
+      Email: member.email
+    };
+    this.valid = false;
+    $('#edit_member').modal('show');
+  }
+
+  setMember(value: any) {
+    this.valid = value.valid;
+  }
+
+  editMember() {
     // TODO
-    throw 'Implement me'
+    const member: Member = {
+      Id: this.idForEdit,
+      Name: this.memberForEdit.Name,
+      Email: this.memberForEdit.Email
+    };
+
+    this.memberService.EditMember(member)
+      .pipe(take(1))
+      .subscribe(
+        (result) => {
+          // The alternative would be finding and updating the edited member in the array
+          // Considering the relatively small size of members in this case, I decided to go with the api call
+          this.getMembers();
+          $('#edit_member').modal('hide');
+        },
+        (error) => console.error(error),
+      );
   }
 }

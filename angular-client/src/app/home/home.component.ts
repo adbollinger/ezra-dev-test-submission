@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { Member } from '../classes/member'
+import { MemberService } from '../services/member.service'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,14 @@ import { HttpClient } from '@angular/common/http'
 export class HomeComponent {
   public members: Member[]
 
-  constructor(http: HttpClient) {
-    http.get<Member[]>('http://localhost:5000/members').subscribe(
+  constructor(private memberService: MemberService) {
+    this.getMembers();
+  }
+
+  getMembers() {
+    this.memberService.GetMembers()
+    .pipe(take(1))
+    .subscribe(
       (result) => {
         this.members = result
       },
@@ -27,10 +35,4 @@ export class HomeComponent {
     // TODO
     throw 'Implement me'
   }
-}
-
-interface Member {
-  Id: string
-  Name: number
-  Email: number
 }

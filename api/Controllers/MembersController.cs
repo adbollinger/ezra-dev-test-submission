@@ -45,7 +45,7 @@ namespace EzraTest.Controllers
             {
                 Email = newMember.Email,
                 Name = newMember.Name,
-                Id = new Guid()
+                Id = Guid.NewGuid()
             };
 
             int rowsAffected = _membersRepository.AddMember(member);

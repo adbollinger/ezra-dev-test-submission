@@ -8,14 +8,16 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AddMemberComponent } from './add-member/add-member.component';
+import { MemberFormComponent } from './member-form/member-form.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    AddMemberComponent
-  ],
+    AddMemberComponent,
+      MemberFormComponent
+   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

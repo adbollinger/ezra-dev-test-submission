@@ -3,7 +3,7 @@
 ## Time taken:
 - Thursday August 20 - 1hr reviewing code
 - Friday August 21 - 5hrs coding
-- Monday Auguest 24 - 30min coding
+- Monday August 24 - 30min coding
 
 ## Front end chosen:
 I chose Angular to use as a front-end framework
